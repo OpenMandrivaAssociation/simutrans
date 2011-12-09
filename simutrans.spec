@@ -3,7 +3,7 @@
 
 Name:		simutrans
 Version:	0.%{majver}.%{minver}
-Release:	%mkrel 1
+Release:	%mkrel 2
 Summary:	Transport and Economic Simulation Game
 License:	Artistic
 Group:		Games/Strategy
@@ -15,6 +15,7 @@ Source3:	simutrans.desktop
 Source4:	simutrans.png
 Source5:	simutrans_langtabs-99-17.tar.bz2
 Patch:		simutrans-no-x86-specifics-0.111.0.patch
+Patch1:		simutrans-0.111.0-homepath.patch
 Requires:	simutrans-pak >= 0.%{majver}
 BuildRequires:	SDL-devel
 BuildRequires:	SDL_mixer-devel
@@ -38,6 +39,7 @@ is a living game, and consistently being made better and better.
 %prep
 %setup -q -c -a 5
 find . -type f -exec chmod 644 {} \;
+%patch1 -p1 -b .homepath
 %ifarch x86_64
 %patch -p1
 %endif
