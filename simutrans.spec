@@ -14,7 +14,7 @@ Source2:	simutrans.run
 Source3:	simutrans.desktop
 Source4:	simutrans.png
 Source5:	simutrans_langtabs-99-17.tar.bz2
-Patch:		simutrans-no-x86-specifics.patch
+Patch:		simutrans-no-x86-specifics-0.111.0.patch
 Requires:	simutrans-pak >= 0.%{majver}
 BuildRequires:	SDL-devel
 BuildRequires:	SDL_mixer-devel
