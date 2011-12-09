@@ -37,11 +37,11 @@ is a living game, and consistently being made better and better.
 
 %prep
 %setup -q -c -a 5
+find . -type f -exec chmod 644 {} \;
 %ifnarch %{ix86}
 %patch -p1
 %endif
 cp -pr %{SOURCE1} .
-find . -type f -exec chmod 644 {} \;
 
 %build
 %make
