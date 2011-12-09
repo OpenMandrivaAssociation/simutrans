@@ -38,12 +38,12 @@ is a living game, and consistently being made better and better.
 %prep
 %setup -q -c -a 5
 find . -type f -exec chmod 644 {} \;
-%ifnarch %{ix86}
+%ifarch x86_64
 %patch -p1
 %endif
-cp -pr %{SOURCE1} .
 
 %build
+%__cp -pr %{SOURCE1} .
 %make
 
 %install
@@ -53,13 +53,13 @@ cp -pr %{SOURCE1} .
 %__mkdir_p %{buildroot}%{_iconsdir}
 %__mkdir_p %{buildroot}%{_datadir}/applications
 
-install -m 0755 build/default/sim %{buildroot}%{_libexecdir}/simutrans/simutrans.bin
-cp -pr simutrans/{config,font,music,text} %{buildroot}%{_libexecdir}/simutrans/
+%__install -m 0755 build/default/sim %{buildroot}%{_libexecdir}/simutrans/simutrans.bin
+%__cp -pr simutrans/{config,font,music,text} %{buildroot}%{_libexecdir}/simutrans/
 
-sed -e 's,@LIBEXECDIR@,%{_libexecdir},g' %{SOURCE2} > %{buildroot}%{_bindir}/simutrans
-chmod 0755 %{buildroot}%{_bindir}/simutrans
-install -m 0644 %{SOURCE3} %{buildroot}%{_datadir}/applications/
-install -m 0644 %{SOURCE4} %{buildroot}%{_iconsdir}/
+%__sed -e 's,@LIBEXECDIR@,%{_libexecdir},g' %{SOURCE2} > %{buildroot}%{_bindir}/simutrans
+%__chmod 0755 %{buildroot}%{_bindir}/simutrans
+%__install -m 0644 %{SOURCE3} %{buildroot}%{_datadir}/applications/
+%__install -m 0644 %{SOURCE4} %{buildroot}%{_iconsdir}/
 
 %clean
 %__rm -rf %{buildroot}
