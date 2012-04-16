@@ -1,21 +1,23 @@
-%define	majver	111
-%define	minver	0
+%define	majver		111
+%define	minver		2
+%define	minminver	2
 
 Name:		simutrans
-Version:	0.%{majver}.%{minver}
-Release:	%mkrel 2
+Version:	0.%{majver}.%{minver}.%{minminver}
+Release:	%mkrel 1
 Summary:	Transport and Economic Simulation Game
 License:	Artistic
 Group:		Games/Strategy
 Url:		http://www.simutrans.com/
-Source:		%{name}-src-%{majver}-%{minver}.zip
+Source:		%{name}-src-%{majver}-%{minver}-%{minminver}.zip
 Source1:	config.default
 Source2:	simutrans.run
 Source3:	simutrans.desktop
 Source4:	simutrans.png
 Source5:	simutrans_langtabs-99-17.tar.bz2
-Patch:		simutrans-no-x86-specifics-0.111.0.patch
-Patch1:		simutrans-0.111.0-homepath.patch
+Patch0:		simutrans-no-x86-specifics-0.111.0.patch
+Patch1:		simutrans-0.111.2.2-homepath.patch
+Patch2:		simutrans-0.111.2.2-headers.patch
 Requires:	simutrans-pak >= 0.%{majver}
 BuildRequires:	SDL-devel
 BuildRequires:	SDL_mixer-devel
@@ -40,8 +42,9 @@ is a living game, and consistently being made better and better.
 %setup -q -c -a 5
 find . -type f -exec chmod 644 {} \;
 %patch1 -p1 -b .homepath
+%patch2 -p1 -b .header
 %ifarch x86_64
-%patch -p1
+%patch0 -p1
 %endif
 
 %build
@@ -67,7 +70,6 @@ find . -type f -exec chmod 644 {} \;
 %__rm -rf %{buildroot}
 
 %files
-%defattr (-,root,root)
 %doc simutrans/*.txt
 %{_bindir}/*
 %{_libexecdir}/simutrans
