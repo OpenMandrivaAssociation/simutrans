@@ -15,7 +15,7 @@ Source2:	simutrans.run
 Source3:	simutrans.desktop
 Source4:	simutrans.png
 Source5:	simutrans_langtabs-99-17.tar.bz2
-Patch0:		simutrans-no-x86-specifics-0.111.0.patch
+Patch0:		simutrans-no-x86-specifics-0.111.2.2.patch
 Patch1:		simutrans-0.111.2.2-homepath.patch
 Patch2:		simutrans-0.111.2.2-headers.patch
 Requires:	simutrans-pak >= 0.%{majver}
