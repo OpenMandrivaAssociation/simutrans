@@ -1,0 +1,12 @@
+diff -urN simutrans-0.111.2.2/simsys.cc simutrans-0.111.2.2-patched/simsys.cc
+--- simutrans-0.111.2.2/simsys.cc	2012-03-21 09:16:32.000000000 +1100
++++ simutrans-0.111.2.2-patched/simsys.cc	2012-04-17 01:09:25.804006780 +1100
+@@ -47,7 +47,7 @@
+ #elif defined __APPLE__
+ 	sprintf(buffer, "%s/Library/Simutrans", getenv("HOME"));
+ #else
+-	sprintf(buffer, "%s/simutrans", getenv("HOME"));
++	sprintf(buffer, "%s/.simutrans", getenv("HOME"));
+ #endif
+ 
+ 	dr_mkdir(buffer);
