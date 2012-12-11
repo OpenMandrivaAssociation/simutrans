@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+
+#
+# starting script for Simutrans
+# - create/update links to all simutrans files
+#
+
+SIMUTRANS_DIR="$HOME/.simutrans";
+
+if [ ! -d "$SIMUTRANS_DIR" ] ; then
+	echo "Creating Simutrans directory $SIMUTRANS_DIR";
+	if ! mkdir "$HOME/.simutrans"; then
+		echo "Failed to create directory $SIMUTRANS_DIR";
+		exit 1;
+	fi;
+fi;
+
+cd "$SIMUTRANS_DIR";
+echo "Updating links";
+find $SIMUTRANS_DIR -type l -exec rm -f {} \;
+
+ln -sf @LIBEXECDIR@/simutrans/* .
+
+echo "Using Simutrans directory structure in $SIMUTRANS_DIR";
+exec ./simutrans.bin -use_workdir "$@";
+

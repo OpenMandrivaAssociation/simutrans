@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Simutrans
+Name[ru]=Simutrans
+Comment=Transport and Economic Simulator Game
+Comment[ru]=Транспортная и экономическая игра-симулятор
+Exec=simutrans
+Icon=simutrans
+MimeType=
+Path=$HOME/.simutrans
+Categories=StrategyGame;Game;
+StartupNotify=true
+Terminal=false
+Type=Application

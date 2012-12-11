@@ -1,10 +1,10 @@
 %define	majver		111
-%define	minver		2
-%define	minminver	2
+%define	minver		3
+%define	minminver	1
 
 Name:		simutrans
 Version:	0.%{majver}.%{minver}.%{minminver}
-Release:	%mkrel 1
+Release:	1
 Summary:	Transport and Economic Simulation Game
 License:	Artistic
 Group:		Games/Strategy
@@ -17,7 +17,6 @@ Source4:	simutrans.png
 Source5:	simutrans_langtabs-99-17.tar.bz2
 Patch0:		simutrans-no-x86-specifics-0.111.2.2.patch
 Patch1:		simutrans-0.111.2.2-homepath.patch
-Patch2:		simutrans-0.111.2.2-headers.patch
 Requires:	simutrans-pak >= 0.%{majver}
 BuildRequires:	SDL-devel
 BuildRequires:	SDL_mixer-devel
@@ -42,32 +41,27 @@ is a living game, and consistently being made better and better.
 %setup -q -c -a 5
 find . -type f -exec chmod 644 {} \;
 %patch1 -p1 -b .homepath
-%patch2 -p1 -b .header
 %ifarch x86_64
 %patch0 -p1
 %endif
 
 %build
-%__cp -pr %{SOURCE1} .
+cp -pr %{SOURCE1} .
 %make
 
 %install
-%__rm -rf %{buildroot}
-%__mkdir_p %{buildroot}%{_libexecdir}/simutrans
-%__mkdir_p %{buildroot}%{_bindir}
-%__mkdir_p %{buildroot}%{_iconsdir}
-%__mkdir_p %{buildroot}%{_datadir}/applications
+mkdir -p %{buildroot}%{_libexecdir}/simutrans
+mkdir -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_iconsdir}
+mkdir -p %{buildroot}%{_datadir}/applications
 
-%__install -m 0755 build/default/sim %{buildroot}%{_libexecdir}/simutrans/simutrans.bin
-%__cp -pr simutrans/{config,font,music,text} %{buildroot}%{_libexecdir}/simutrans/
+install -m 0755 build/default/sim %{buildroot}%{_libexecdir}/simutrans/simutrans.bin
+cp -pr simutrans/{config,font,music,text} %{buildroot}%{_libexecdir}/simutrans/
 
-%__sed -e 's,@LIBEXECDIR@,%{_libexecdir},g' %{SOURCE2} > %{buildroot}%{_bindir}/simutrans
-%__chmod 0755 %{buildroot}%{_bindir}/simutrans
-%__install -m 0644 %{SOURCE3} %{buildroot}%{_datadir}/applications/
-%__install -m 0644 %{SOURCE4} %{buildroot}%{_iconsdir}/
-
-%clean
-%__rm -rf %{buildroot}
+sed -e 's,@LIBEXECDIR@,%{_libexecdir},g' %{SOURCE2} > %{buildroot}%{_bindir}/simutrans
+chmod 0755 %{buildroot}%{_bindir}/simutrans
+install -m 0644 %{SOURCE3} %{buildroot}%{_datadir}/applications/
+install -m 0644 %{SOURCE4} %{buildroot}%{_iconsdir}/
 
 %files
 %doc simutrans/*.txt
@@ -75,4 +69,20 @@ find . -type f -exec chmod 644 {} \;
 %{_libexecdir}/simutrans
 %{_iconsdir}/*
 %{_datadir}/applications/*.desktop
+
+
+
+%changelog
+* Mon Apr 16 2012 Andrey Bondrov <abondrov@mandriva.org> 0.111.2.2-1
++ Revision: 791350
+- Re-diff no-x86-specifics patch
+- New version 0.111.2.2
+
+* Fri Dec 09 2011 Andrey Bondrov <abondrov@mandriva.org> 0.111.0-2
++ Revision: 739531
+- Add patch1 to fix game config dir in user home
+
+* Fri Dec 09 2011 Andrey Bondrov <abondrov@mandriva.org> 0.111.0-1
++ Revision: 739527
+- imported package simutrans
 
