@@ -20,8 +20,8 @@ cd "$SIMUTRANS_DIR";
 echo "Updating links";
 find $SIMUTRANS_DIR -type l -exec rm -f {} \;
 
-ln -sf @LIBEXECDIR@/simutrans/* .
+ln -sf @DATADIR@/simutrans/* .
 
 echo "Using Simutrans directory structure in $SIMUTRANS_DIR";
-exec ./simutrans.bin -use_workdir "$@";
+exec @BINDIR@/simutrans.bin -use_workdir "$@";
 

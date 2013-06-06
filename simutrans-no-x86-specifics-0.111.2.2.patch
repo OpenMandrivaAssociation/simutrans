@@ -1,7 +1,6 @@
-diff -urN simutrans-0.111.2.2/Makefile simutrans-0.111.2.2-patched/Makefile
---- simutrans-0.111.2.2/Makefile	2012-03-21 08:34:16.000000000 +1100
-+++ simutrans-0.111.2.2-patched/Makefile	2012-04-17 01:46:01.854155383 +1100
-@@ -44,6 +44,7 @@
+--- simutrans-0.112.3/Makefile.orig	2013-05-03 00:05:39.000000000 +0200
++++ simutrans-0.112.3/Makefile	2013-06-06 13:55:32.665601452 +0200
+@@ -43,6 +43,7 @@ ifeq ($(OSTYPE),mac)
  endif
  
  ifeq ($(OSTYPE),linux)
@@ -9,17 +8,3 @@ diff -urN simutrans-0.111.2.2/Makefile simutrans-0.111.2.2-patched/Makefile
    LIBS += -lz -lbz2
  endif
  
-@@ -81,13 +82,6 @@
- 
- ifneq ($(OPTIMISE),)
-     CFLAGS += -O3 -fno-schedule-insns
--  ifneq ($(OSTYPE),mac)
--    ifneq ($(OSTYPE),haiku)
--      ifneq ($(OSTYPE),amiga)
--        CFLAGS += -minline-all-stringops
--      endif
--    endif
--  endif
- else
-   CFLAGS += -O
- endif
