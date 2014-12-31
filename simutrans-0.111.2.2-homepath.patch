@@ -1,7 +1,6 @@
-diff -urN simutrans-0.111.2.2/simsys.cc simutrans-0.111.2.2-patched/simsys.cc
---- simutrans-0.111.2.2/simsys.cc	2012-03-21 09:16:32.000000000 +1100
-+++ simutrans-0.111.2.2-patched/simsys.cc	2012-04-17 01:09:25.804006780 +1100
-@@ -47,7 +47,7 @@
+--- simutrans-0.120.0.1/simsys.cc.homepath	2014-12-31 21:12:10.373382220 +0100
++++ simutrans-0.120.0.1/simsys.cc	2014-12-31 21:12:47.717003040 +0100
+@@ -89,7 +89,7 @@ char const* dr_query_homedir()
  #elif defined __APPLE__
  	sprintf(buffer, "%s/Library/Simutrans", getenv("HOME"));
  #else
