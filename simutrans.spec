@@ -12,7 +12,7 @@ Version:	0.%{majver}.%{minver}
 Source0:	http://tenet.dl.sourceforge.net/project/simutrans/simutrans/%majver-%minver/simutrans-src-%majver-%minver.zip
 Source9:	http://tenet.dl.sourceforge.net/project/simutrans/simutrans/%majver-%minver/simulinux-%majver-%minver.zip
 %endif
-Release:	1
+Release:	2
 Summary:	Transport and Economic Simulation Game
 License:	Artistic
 Group:		Games/Strategy
