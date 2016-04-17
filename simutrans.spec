@@ -1,18 +1,18 @@
 %define	majver		120
-%define	minver		0
-%define	minminver	1
+%define	minver		1
+%define	minminver	3
 
 Name:		simutrans
 %if "%minminver" != ""
 Version:	0.%{majver}.%{minver}.%{minminver}
-Source0:	http://skylink.dl.sourceforge.net/project/simutrans/simutrans/%majver-%minver-%minminver/simutrans-src-%majver-%minver-%minminver.zip
-Source9:	http://skylink.dl.sourceforge.net/project/simutrans/simutrans/%majver-%minver-%minminver/simulinux-x64-%majver-%minver-%minminver.zip
+Source0:	http://tenet.dl.sourceforge.net/project/simutrans/simutrans/%majver-%minver-%minminver/simutrans-src-%majver-%minver-%minminver.zip
+Source9:	http://tenet.dl.sourceforge.net/project/simutrans/simutrans/%majver-%minver-%minminver/simulinux-i86-%majver-%minver-%minminver.zip
 %else
 Version:	0.%{majver}.%{minver}
 Source0:	http://tenet.dl.sourceforge.net/project/simutrans/simutrans/%majver-%minver/simutrans-src-%majver-%minver.zip
-Source9:	http://tenet.dl.sourceforge.net/project/simutrans/simutrans/%majver-%minver/simulinux-%majver-%minver.zip
+Source9:	http://tenet.dl.sourceforge.net/project/simutrans/simutrans/%majver-%minver/simulinux-i86-%majver-%minver.zip
 %endif
-Release:	2
+Release:	1
 Summary:	Transport and Economic Simulation Game
 License:	Artistic
 Group:		Games/Strategy

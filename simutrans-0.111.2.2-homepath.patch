@@ -1,8 +1,8 @@
---- simutrans-0.120.0.1/simsys.cc.homepath	2014-12-31 21:12:10.373382220 +0100
-+++ simutrans-0.120.0.1/simsys.cc	2014-12-31 21:12:47.717003040 +0100
-@@ -89,7 +89,7 @@ char const* dr_query_homedir()
- #elif defined __APPLE__
- 	sprintf(buffer, "%s/Library/Simutrans", getenv("HOME"));
+--- simutrans-0.120.1.3/simsys.cc.homepath~	2016-04-17 12:38:56.483542477 +0200
++++ simutrans-0.120.1.3/simsys.cc	2016-04-17 12:39:36.958081652 +0200
+@@ -168,7 +168,7 @@ char const* dr_query_homedir()
+ 	find_directory(B_USER_DIRECTORY, &userDir);
+ 	sprintf(buffer, "%s/simutrans", userDir.Path());
  #else
 -	sprintf(buffer, "%s/simutrans", getenv("HOME"));
 +	sprintf(buffer, "%s/.simutrans", getenv("HOME"));
