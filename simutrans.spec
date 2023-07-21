@@ -1,17 +1,11 @@
-%define	majver		120
-%define	minver		1
-%define	minminver	3
+%define majver %(echo %{version} |cut -d. -f1)
+%define minver %(echo %{version} |cut -d. -f2)
+%define minminver %(echo %{version} |cut -d. -f3)
 
 Name:		simutrans
-%if "%minminver" != ""
-Version:	0.%{majver}.%{minver}.%{minminver}
+Version:	123.0.1
 Source0:	http://tenet.dl.sourceforge.net/project/simutrans/simutrans/%majver-%minver-%minminver/simutrans-src-%majver-%minver-%minminver.zip
-Source9:	http://tenet.dl.sourceforge.net/project/simutrans/simutrans/%majver-%minver-%minminver/simulinux-i86-%majver-%minver-%minminver.zip
-%else
-Version:	0.%{majver}.%{minver}
-Source0:	http://tenet.dl.sourceforge.net/project/simutrans/simutrans/%majver-%minver/simutrans-src-%majver-%minver.zip
-Source9:	http://tenet.dl.sourceforge.net/project/simutrans/simutrans/%majver-%minver/simulinux-i86-%majver-%minver.zip
-%endif
+Source9:	http://tenet.dl.sourceforge.net/project/simutrans/simutrans/%majver-%minver-%minminver/simulinux-x64-%majver-%minver-%minminver.zip
 Release:	1
 Summary:	Transport and Economic Simulation Game
 License:	Artistic
@@ -25,12 +19,14 @@ Source5:	simutrans_langtabs-99-17.tar.bz2
 Source100:	%name.rpmlintrc
 Patch0:		simutrans-no-x86-specifics-0.111.2.2.patch
 Patch1:		simutrans-0.111.2.2-homepath.patch
-Patch2:		simutrans-0.120-opengl-compile.patch
 Requires:	simutrans-pak >= 0.%{majver}
-BuildRequires:	pkgconfig(sdl)
-BuildRequires:	pkgconfig(SDL_mixer)
+BuildRequires:	pkgconfig(sdl2)
+BuildRequires:	pkgconfig(SDL2_mixer)
+BuildRequires:	pkgconfig(libzstd)
 BuildRequires:	bzip2-devel
 BuildRequires:	zlib-devel
+BuildRequires:	cmake ninja
+Recommends:	timidity-patch-SGMPlusStein
 
 %description
 Simutrans is a free transportation simulator.
@@ -50,16 +46,19 @@ is a living game, and consistently being made better and better.
 %setup -q -c -a 5
 find . -type f -exec chmod 644 {} \;
 %patch1 -p1 -b .homepath~
-%ifarch x86_64
+%ifarch %{x86_64}
 %patch0 -p1 -b .64~
 %endif
-%patch2 -p1 -b .glew~
 unzip -o %SOURCE9
+
+%cmake \
+	-DENABLE_WATERWAY_SIGNS:BOOL=ON \
+	-DSIMUTRANS_INSTALL_PAK64:BOOL=ON \
+	-G Ninja
 
 %build
 cp -pr %{SOURCE1} .
-%make
-# Currently broken, but may be good in the future: BACKEND=opengl
+%ninja_build -C build
 
 %install
 mkdir -p %{buildroot}%{_datadir}/simutrans
@@ -67,13 +66,15 @@ mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_iconsdir}
 mkdir -p %{buildroot}%{_datadir}/applications
 
-install -m 0755 build/default/sim %{buildroot}%{_bindir}/simutrans.bin
+install -m 0755 build/simutrans/simutrans %{buildroot}%{_bindir}/simutrans.bin
 cp -pr simutrans/{config,font,music,script,text,themes} %{buildroot}%{_datadir}/simutrans/
 
 sed -e 's,@DATADIR@,%{_datadir},g;s,@BINDIR@,%_bindir,g' %{SOURCE2} > %{buildroot}%{_bindir}/simutrans
 chmod 0755 %{buildroot}%{_bindir}/simutrans
 install -m 0644 %{SOURCE3} %{buildroot}%{_datadir}/applications/
 install -m 0644 %{SOURCE4} %{buildroot}%{_iconsdir}/
+
+ln -s %{_datadir}/timidity/SGMPlusStein/SGM-V2.01-JN5.2PlusStein.sf2 %{buildroot}%{_datadir}/simutrans/music/
 
 %files
 %doc simutrans/*.txt

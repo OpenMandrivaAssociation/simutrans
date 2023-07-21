@@ -1,11 +1,12 @@
---- simutrans-0.120.1.3/simsys.cc.homepath~	2016-04-17 12:38:56.483542477 +0200
-+++ simutrans-0.120.1.3/simsys.cc	2016-04-17 12:39:36.958081652 +0200
-@@ -168,7 +168,7 @@ char const* dr_query_homedir()
- 	find_directory(B_USER_DIRECTORY, &userDir);
- 	sprintf(buffer, "%s/simutrans", userDir.Path());
+diff -up simutrans-123.0.1/sys/simsys.cc.homepath~ simutrans-123.0.1/sys/simsys.cc
+--- simutrans-123.0.1/sys/simsys.cc.homepath~	2023-05-11 17:22:05.878233813 +0200
++++ simutrans-123.0.1/sys/simsys.cc	2023-05-11 17:22:37.215498277 +0200
+@@ -395,7 +395,7 @@ char const *dr_query_homedir()
+ #elif defined __ANDROID__
+ 	tstrncpy(buffer,SDL_GetPrefPath("Simutrans Team","simutrans"),lengthof(buffer));
  #else
 -	sprintf(buffer, "%s/simutrans", getenv("HOME"));
 +	sprintf(buffer, "%s/.simutrans", getenv("HOME"));
  #endif
  
- 	dr_mkdir(buffer);
+ 	// create directory and subdirectories

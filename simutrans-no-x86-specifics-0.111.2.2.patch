@@ -1,11 +1,12 @@
---- simutrans-0.120.0.1/Makefile.64~	2014-12-31 21:14:15.351010543 +0100
-+++ simutrans-0.120.0.1/Makefile	2014-12-31 21:15:45.968373661 +0100
-@@ -18,6 +18,8 @@ ifeq ($(findstring $(OSTYPE), $(OSTYPES)
+diff -up simutrans-123.0.1/Makefile.64~ simutrans-123.0.1/Makefile
+--- simutrans-123.0.1/Makefile.64~	2023-05-11 17:22:51.356618322 +0200
++++ simutrans-123.0.1/Makefile	2023-05-11 17:24:00.769213455 +0200
+@@ -37,6 +37,8 @@ ifeq ($(findstring $(OSTYPE), $(OSTYPES)
    $(error Unkown OSTYPE "$(OSTYPE)", must be one of "$(OSTYPES)")
  endif
  
 +CFLAGS += -DUSE_HW -DUSE_C
 +
- ifeq ($(OSTYPE),amiga)
-   STD_LIBS ?= -lunix -lSDL_mixer -lsmpeg -lvorbisfile -lvorbis -logg
-   CFLAGS += -mcrt=newlib -DUSE_C -DSIM_BIG_ENDIAN -gstabs+
+ ifeq ($(BACKEND),posix)
+   COLOUR_DEPTH := 0
+ else
