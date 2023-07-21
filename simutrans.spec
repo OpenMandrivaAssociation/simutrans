@@ -23,6 +23,7 @@ Requires:	simutrans-pak >= 0.%{majver}
 BuildRequires:	pkgconfig(sdl2)
 BuildRequires:	pkgconfig(SDL2_mixer)
 BuildRequires:	pkgconfig(libzstd)
+BuildRequires:	pkgconfig(libpng)
 BuildRequires:	bzip2-devel
 BuildRequires:	zlib-devel
 BuildRequires:	cmake ninja
