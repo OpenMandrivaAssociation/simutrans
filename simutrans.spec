@@ -1,11 +1,12 @@
 %define majver %(echo %{version} |cut -d. -f1)
 %define minver %(echo %{version} |cut -d. -f2)
 %define minminver %(echo %{version} |cut -d. -f3)
+%define dashedver %(echo %{version} |sed -e 's,\\.,-,g')
 
 Name:		simutrans
-Version:	123.0.1
-Source0:	http://tenet.dl.sourceforge.net/project/simutrans/simutrans/%majver-%minver-%minminver/simutrans-src-%majver-%minver-%minminver.zip
-Source9:	http://tenet.dl.sourceforge.net/project/simutrans/simutrans/%majver-%minver-%minminver/simulinux-x64-%majver-%minver-%minminver.zip
+Version:	124.1
+Source0:	http://tenet.dl.sourceforge.net/project/simutrans/simutrans/%{dashedver}/simutrans-src-%{dashedver}.zip
+Source9:	http://tenet.dl.sourceforge.net/project/simutrans/simutrans/%{dashedver}/simulinux-x64-%{dashedver}.zip
 Release:	1
 Summary:	Transport and Economic Simulation Game
 License:	Artistic
@@ -46,9 +47,9 @@ is a living game, and consistently being made better and better.
 %prep
 %setup -q -c -a 5
 find . -type f -exec chmod 644 {} \;
-%patch1 -p1 -b .homepath~
-%ifarch %{x86_64}
-%patch0 -p1 -b .64~
+%patch 1 -p1 -b .homepath~
+%ifnarch %{ix86}
+%patch 0 -p1 -b .64~
 %endif
 unzip -o %SOURCE9
 

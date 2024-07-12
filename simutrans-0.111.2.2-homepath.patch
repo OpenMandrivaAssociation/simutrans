@@ -1,12 +1,37 @@
-diff -up simutrans-123.0.1/sys/simsys.cc.homepath~ simutrans-123.0.1/sys/simsys.cc
---- simutrans-123.0.1/sys/simsys.cc.homepath~	2023-05-11 17:22:05.878233813 +0200
-+++ simutrans-123.0.1/sys/simsys.cc	2023-05-11 17:22:37.215498277 +0200
-@@ -395,7 +395,7 @@ char const *dr_query_homedir()
- #elif defined __ANDROID__
- 	tstrncpy(buffer,SDL_GetPrefPath("Simutrans Team","simutrans"),lengthof(buffer));
+diff -up simutrans-124.1/src/simutrans/sys/simsys.cc.homepath~ simutrans-124.1/src/simutrans/sys/simsys.cc
+--- simutrans-124.1/src/simutrans/sys/simsys.cc.homepath~	2024-07-12 13:44:19.860570973 +0200
++++ simutrans-124.1/src/simutrans/sys/simsys.cc	2024-07-12 13:45:17.105208455 +0200
+@@ -554,9 +554,9 @@ char const *dr_query_homedir()
+ 	}
  #else
--	sprintf(buffer, "%s/simutrans", getenv("HOME"));
-+	sprintf(buffer, "%s/.simutrans", getenv("HOME"));
+ 	if( getenv("XDG_DATA_HOME") == NULL ) {
+-		sprintf(buffer, "%s/simutrans", getenv("HOME"));
++		sprintf(buffer, "%s/.simutrans", getenv("HOME"));
+ 	} else {
+-		sprintf(buffer, "%s/simutrans", getenv("XDG_DATA_HOME"));
++		sprintf(buffer, "%s/.simutrans", getenv("XDG_DATA_HOME"));
+ 	}
  #endif
  
- 	// create directory and subdirectories
+@@ -597,10 +597,10 @@ char const *dr_query_installdir()
+ 	tstrncpy(buffer,SDL_AndroidGetExternalStoragePath(),lengthof(buffer));
+ #else
+ 	if( getenv("XDG_DATA_HOME") == NULL ) {
+-		sprintf(buffer, "%s/simutrans/paksets", getenv("HOME"));
++		sprintf(buffer, "%s/.simutrans/paksets", getenv("HOME"));
+ 	}
+ 	else {
+-		sprintf(buffer, "%s/simutrans/paksets", getenv("XDG_DATA_HOME"));
++		sprintf(buffer, "%s/.simutrans/paksets", getenv("XDG_DATA_HOME"));
+ 	}
+ #endif
+ 
+@@ -761,7 +761,7 @@ std::string dr_get_system_font()
+ 	FcPattern* font = FcFontMatch(config, pat, &result);
+ 
+ 	if (font) {
+-		FcChar8* file = NULL; 
++		FcChar8* file = NULL;
+ 
+ 		if (  FcPatternGetString(font, FC_FILE, 0, &file) == FcResultMatch  ) {
+ 			fontFile = (char*)file;
