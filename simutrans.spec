@@ -11,7 +11,7 @@ Release:	1
 Summary:	Transport and Economic Simulation Game
 License:	Artistic
 Group:		Games/Strategy
-Url:		http://www.simutrans.com/
+Url:		https://www.simutrans.com/
 Source1:	config.default
 Source2:	simutrans.run
 Source3:	simutrans.desktop
